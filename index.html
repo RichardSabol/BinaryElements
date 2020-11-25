@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Binary Elements</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="ghttps://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand js-scroll-trigger" href="#page-top">Binary Elements</a>
+                <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">Converter</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">Calculator</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Map Solver</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Masthead-->
+        <header class="masthead bg-primary text-white text-center">
+            <div class="container d-flex align-items-center flex-column">
+                <!-- Masthead Avatar Image-->
+<!--                <img class="masthead-avatar mb-5" src="assets/img/avataaars.svg" alt="" />-->
+                <!-- Masthead Heading-->
+                <h1 class="masthead-heading text-uppercase mb-0">Home</h1>
+                <!-- Icon Divider-->
+                <div class="divider-custom divider-light">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-line"></div>
+                </div>
+                <!-- Masthead Subheading-->
+                <p class="masthead-subheading font-weight-light mb-0">Welcome</p>
+                <p class="masthead-subheading font-weight-light mb-0">
+                    to our application which provides different tools to work with binary and other systems.</p>
+                <button type="button" title="Go to unit convertion" class="btn btn-secondary">Unit converter</button>
+                <button type="button" title="Go to Calculator" class="btn btn-secondary">Calculator</button>
+                <button type="button" title="Go to map " class="btn btn-secondary">Map solver</button>
+            </div>
+        </header>
+        <!-- Portfolio Section-->
+        <section class="page-section portfolio" id="portfolio">
+            <div class="container">
+                <!-- Portfolio Section Heading-->
+                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Unit converter</h2>
+                <!-- Icon Divider-->
+                <div class="divider-custom">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-line"></div>
+                </div>
+
+                <div id="doc" class="container d-flex flex-column align-items-center">
+                    <!-- #BeginEditable "doctext" -->
+                    <div id="unitnav" class="form-row mb-2" style="max-width:476px;">
+                        <div class="form-group col">
+                            <label for="converter_unit_1">From</label>
+                            <select id="converter_unit_1" class="form-control">
+                                <option>Binary</option>
+                                <option selected>Decimal</option>
+                                <option>Octal</option>
+                                <option>Hexadecimal</option>
+                            </select>
+                        </div>
+                        <div class="form-group col" style="display: none">
+                            <label for="converter_unit_2">To</label>
+                            <select id="converter_unit_2" class="form-control">
+                                <option>Decimal</option>
+                                <option>Binary</option>
+                                <option selected>Hexadecimal</option>
+                            </select>
+                        </div>
+                    </div>
+                        <table class="calc">
+                            <tbody>
+                            <tr>
+                                <td colspan="2"><label id="converter_input_label" for="converter_input">Enter Decimal number:</label></td>
+                            </tr>
+                            <tr>
+                                <!--<td><input type="number" step="any" id="x" name="x" class="intext" autofocus tabindex="1"></td>-->
+                                <td><input type="text" inputmode="numeric" id="converter_input" name="converter_input"
+                                           class="form-control" required></td>
+                                <td id="converter_input_symbol" class="mathsymbol"><sub>10</sub></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <br>
+                                    <button type="button" title="Convert" class="btn btn-primary" onclick="convert()" style="display: none"> Convert</button>
+                                    <button type="button" onclick="converter_reset()" title="Reset" class="btn btn-danger">Reset</button>
+                                    <button type="button" title="Swap conversion" class="btn btn-secondary" style="display: none"> Swap</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="bottom: -20px"><label for="converter_output_1" id="converter_label_1">Binary</label></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <textarea rows="2" id="converter_output_1" class="form-control copyable" readonly></textarea>
+                                    <img class="copy_icon" src="assets/img/copyicon.png" onclick="copyText('converter_output_1')" alt="copy">
+                                </td>
+                                <td id="converter_output_symbol1" class="mathsymbol"><sub>2</sub></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><label for="converter_output_2" id="converter_label_2">Octal</label></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <textarea rows="2" id="converter_output_2" class="form-control copyable" readonly></textarea>
+                                    <img class="copy_icon" src="assets/img/copyicon.png" onclick="copyText('converter_output_2')" alt="copy">
+                                </td>
+                                <td id="converter_output_symbol2" class="mathsymbol"><sub>8</sub></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><label for="converter_output_3" id="converter_label_3">Hexadecimal</label></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <textarea rows="2" id="converter_output_3" class="form-control copyable" readonly></textarea>
+                                    <img class="copy_icon" src="assets/img/copyicon.png" onclick="copyText('converter_output_3')" alt="copy">
+                                </td>
+                                <td id="converter_output_symbol3" class="mathsymbol"><sub>16</sub></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+        </section>
+        <!-- About Section-->
+        <section class="page-section bg-primary text-white mb-0" id="about">
+            <div class="container">
+                <!-- About Section Heading-->
+                <h2 class="page-section-heading text-center text-uppercase text-white">Calculator</h2>
+                <!-- Icon Divider-->
+                <div class="divider-custom divider-light">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-line"></div>
+                </div>
+                <!-- About Section Content-->
+                <div class="row">
+                    <div id="doc1" class="container d-flex flex-column align-items-center">
+                        <!-- #BeginEditable "doctext" -->
+                        <h1>Binary Calculator</h1>
+                            <table class="calc">
+                                <tbody>
+                                <tr>
+                                    <td colspan="2"><label for="calculator_first_number">First number:</label></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" id="calculator_first_number" name="calculator_first_number" autofocus oninput="this.value = this.value.toUpperCase()" class="form-control input-lg"></td>
+                                    <td><select id="calculator_first_op" class="form-control input-lg">
+                                        <option>2</option>
+                                        <option>8</option>
+                                        <option>10</option>
+                                        <option>16</option>
+                                    </select></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><label for="calculator_op">Operation:</label></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <select id="calculator_op" class="form-control input-lg">
+                                            <option>add (+)</option>
+                                            <option>sub (-)</option>
+                                            <option>mul (*)</option>
+                                            <option>div (/)</option>
+                                            <!--<option>zerofill right shift (>>)</option>-->
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><label for="calculator_second_number">Second number:</label></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" id="calculator_second_number" name="calculator_second_number"  class="form-control input-lg"></td>
+                                    <td><select id="calculator_second_op" class="form-control input-lg">
+                                        <option>2</option>
+                                        <option>8</option>
+                                        <option>10</option>
+                                        <option>16</option>
+                                    </select></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <button type="button" title="Calculate" class="btn btn-secondary btn-lg">Calculate</button>
+                                        <button type="button" title="Reset" class="btn btn-danger btn-lg" onclick="calculator_reset()">Reset</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><label for="calculator_output_1">Binary</label></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <textarea rows="2" id="calculator_output_1" class="form-control input-lg" readonly></textarea>
+                                        <img class="copy_icon" src="assets/img/copyicon.png" onclick="copyText('calculator_output_1')" alt="copy">
+                                    </td>
+                                    <td id="calculator_output_symbol1" class="mathsymbol"><sub>2</sub></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><label for="calculator_output_2">Octal</label></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <textarea rows="2" id="calculator_output_2" class="form-control input-lg" readonly></textarea>
+                                        <img class="copy_icon" src="assets/img/copyicon.png" onclick="copyText('calculator_output_2')" alt="copy">
+                                    </td>
+                                    <td id="calculator_output_symbol2" class="mathsymbol"><sub>8</sub></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" ><label for="calculator_output_3">Decimal</label></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <textarea rows="2" id="calculator_output_3" class="form-control input-lg" readonly></textarea>
+                                        <img class="copy_icon" src="assets/img/copyicon.png" onclick="copyText('calculator_output_3')" alt="copy">
+                                    </td>
+                                    <td id="calculator_output_symbol3" class="mathsymbol"><sub>10</sub></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><label for="calculator_output_4">Hexadecimal</label></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><textarea rows="2" id="calculator_output_4" class="form-control copyable input-lg" readonly></textarea></td>
+                                    <td id="calculator_output_symbol4" class="mathsymbol"><sub>16</sub></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                    </div>
+                </div>
+                <!-- About Section Button-->
+                <div class="text-center mt-4">
+                    <a class="btn btn-xl btn-outline-light" href="https://startbootstrap.com/themes/freelancer/">
+                        <i class="fas fa-download mr-2"></i>
+                        Calculate
+                    </a>
+                </div>
+            </div>
+        </section>
+        <!-- Contact Section-->
+        <section class="page-section" id="contact">
+            <div class="container">
+                <!-- Contact Section Heading-->
+                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Karnaugh map solver</h2>
+                <!-- Icon Divider-->
+                <div class="divider-custom">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-line"></div>
+                </div>
+                <!-- Contact Section Form-->
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <div class="kmap-truth-table">
+                            <form method="get">
+                                <div>
+                                    <table class="table table-bordered"><thead><tr><td width="17%">A</td><td width="17%">B</td><td width="17%">C</td><td width="17%">ABC</td><td width="17%">Numeric</td><td width="17%">Choose</td></tr></thead><tbody>
+                                    <tr><td>0</td><td>0</td><td>0</td><td><span class="border-top">A</span><span class="border-top">B</span><span class="border-top">C</span></td><td>0</td><td>
+                                        <div class="k-map-selector text-center">
+                                            <input type="checkbox" id="kmapCheckbox0" name="kmap" value="0"  />
+                                            <label class="kmap-switch-label" for="kmapCheckbox0">
+                                                <span class="onoff"></span>
+                                                <span class="switch"></span>
+                                            </label>
+                                        </div>
+                                    </td></tr>
+                                    <tr><td>0</td><td>0</td><td>1</td><td><span class="border-top">A</span><span class="border-top">B</span>C</td><td>1</td><td>
+                                        <div class="k-map-selector text-center">
+                                            <input type="checkbox" id="kmapCheckbox1" name="kmap" value="1"  />
+                                            <label class="kmap-switch-label" for="kmapCheckbox1">
+                                                <span class="onoff"></span>
+                                                <span class="switch"></span>
+                                            </label>
+                                        </div>
+                                    </td></tr>
+                                    <tr><td>0</td><td>1</td><td>0</td><td><span class="border-top">A</span>B<span class="border-top">C</span></td><td>2</td><td>
+                                        <div class="k-map-selector text-center">
+                                            <input type="checkbox" id="kmapCheckbox2" name="kmap" value="2"  />
+                                            <label class="kmap-switch-label" for="kmapCheckbox2">
+                                                <span class="onoff"></span>
+                                                <span class="switch"></span>
+                                            </label>
+                                        </div>
+                                    </td></tr>
+                                    <tr><td>0</td><td>1</td><td>1</td><td><span class="border-top">A</span>BC</td><td>3</td><td>
+                                        <div class="k-map-selector text-center">
+                                            <input type="checkbox" id="kmapCheckbox3" name="kmap" value="3"  />
+                                            <label class="kmap-switch-label" for="kmapCheckbox3">
+                                                <span class="onoff"></span>
+                                                <span class="switch"></span>
+                                            </label>
+                                        </div>
+                                    </td></tr>
+                                    <tr><td>1</td><td>0</td><td>0</td><td>A<span class="border-top">B</span><span class="border-top">C</span></td><td>4</td><td>
+                                        <div class="k-map-selector text-center">
+                                            <input type="checkbox" id="kmapCheckbox4" name="kmap" value="4"  />
+                                            <label class="kmap-switch-label" for="kmapCheckbox4">
+                                                <span class="onoff"></span>
+                                                <span class="switch"></span>
+                                            </label>
+                                        </div>
+                                    </td></tr>
+                                    <tr><td>1</td><td>0</td><td>1</td><td>A<span class="border-top">B</span>C</td><td>5</td><td>
+                                        <div class="k-map-selector text-center">
+                                            <input type="checkbox" id="kmapCheckbox5" name="kmap" value="5"  />
+                                            <label class="kmap-switch-label" for="kmapCheckbox5">
+                                                <span class="onoff"></span>
+                                                <span class="switch"></span>
+                                            </label>
+                                        </div>
+                                    </td></tr>
+                                    <tr><td>1</td><td>1</td><td>0</td><td>AB<span class="border-top">C</span></td><td>6</td><td>
+                                        <div class="k-map-selector text-center">
+                                            <input type="checkbox" id="kmapCheckbox6" name="kmap" value="6"  />
+                                            <label class="kmap-switch-label" for="kmapCheckbox6">
+                                                <span class="onoff"></span>
+                                                <span class="switch"></span>
+                                            </label>
+                                        </div>
+                                    </td></tr>
+                                    <tr><td>1</td><td>1</td><td>1</td><td>ABC</td><td>7</td><td>
+                                        <div class="k-map-selector text-center">
+                                            <input type="checkbox" id="kmapCheckbox7" name="kmap" value="7"  />
+                                            <label class="kmap-switch-label" for="kmapCheckbox7">
+                                                <span class="onoff"></span>
+                                                <span class="switch"></span>
+                                            </label>
+                                        </div>
+                                    </td></tr>
+                                    <tr><td colspan="6">
+                                        <button id="submit" class="calender-focus calender-submit-button">SOLVE</button></td></tr></tbody></table>
+                                </div>
+                            </form>
+                            <input type="hidden" name="option" value='3' id="option">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Footer-->
+        <footer class="footer text-center">
+            <div class="container">
+                <div class="row">
+                    <!-- Footer Location-->
+                    <div class="col-lg-4 mb-5 mb-lg-0">
+                        <h4 class="text-uppercase mb-4">Location</h4>
+                        <p class="lead mb-0">
+                            2215 John Daniel Drive
+                            <br />
+                            Clark, MO 65243
+                        </p>
+                    </div>
+                    <!-- Footer Social Icons-->
+                    <div class="col-lg-4 mb-5 mb-lg-0">
+                        <h4 class="text-uppercase mb-4">Around the Web</h4>
+                        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-twitter"></i></a>
+                        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-linkedin-in"></i></a>
+                        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-dribbble"></i></a>
+                    </div>
+                    <!-- Footer About Text-->
+                    <div class="col-lg-4">
+                        <h4 class="text-uppercase mb-4">About Freelancer</h4>
+                        <p class="lead mb-0">
+                            Freelance is a free to use, MIT licensed Bootstrap theme created by
+                            <a href="http://startbootstrap.com">Start Bootstrap</a>
+                            .
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Copyright Section-->
+        <div class="copyright py-4 text-center text-white">
+            <div class="container"><small>Copyright © Your Website 2020</small></div>
+        </div>
+        <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes)-->
+        <div class="scroll-to-top d-lg-none position-fixed">
+            <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top"><i class="fa fa-chevron-up"></i></a>
+        </div>
+
+        <!-- Bootstrap core JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+        <!-- Third party plugin JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+        <!-- Contact form JS-->
+        <script src="assets/mail/jqBootstrapValidation.js"></script>
+        <script src="assets/mail/contact_me.js"></script>
+        <!-- Core theme JS-->
+        <script type="module" src="js/scripts.js"></script>
+        <script type="text/javascript" src="js/functions.js"></script>
+
+<!--        <script>-->
+<!--            function copyText(index) {-->
+<!--                const copyText = document.getElementById(index);-->
+<!--                copyText.select();-->
+<!--                copyText.setSelectionRange(0, 99999);-->
+<!--                document.execCommand("copy");-->
+<!--            }-->
+
+<!--            function converter_reset() {-->
+<!--                document.getElementById('converter_input').value = ""-->
+<!--                document.getElementById('converter_output_1').value = ""-->
+<!--                document.getElementById('converter_output_2').value = ""-->
+<!--                document.getElementById('converter_output_3').value = ""-->
+<!--                converter_last_valid = ""-->
+<!--            }-->
+<!--        </script>-->
+
+<!--        oninput="this.value = this.value.toUpperCase()"-->
+<!--        <script src="js/big"></script>-->
+    </body>
+</html>
