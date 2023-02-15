@@ -1,433 +1,768 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Binary Elements</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
-        <!-- Font Awesome icons (free version)-->
-        <script src="ghttps://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
-    </head>
-    <body id="page-top">
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
-            <div class="container">
-                <a class="navbar-brand js-scroll-trigger" href="#page-top">Binary Elements</a>
-                <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    Menu
-                    <i class="fas fa-bars"></i>
+<html lang="sk">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content="Web application with number system operations and Kmap solver"/>
+    <meta name="author" content="Richard Sabol"/>
+    <title>Binary Elements</title>
+    <link rel="icon" type="image/x-icon" href="assets/img/icon.png"/>
+    <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link href="css/fonts.css" rel="stylesheet" type="text/css"/>
+    <link href="css/styles.css" rel="stylesheet"/>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.min.js"></script>
+
+    <script src="js/jquery.i18n.js"></script>
+    <script src="js/jquery.i18n.messagestore.js"></script>
+    <script src="js/jquery.i18n.fallbacks.js"></script>
+    <script src="js/jquery.i18n.language.js"></script>
+    <script src="js/jquery.i18n.parser.js"></script>
+    <script src="js/jquery.i18n.emitter.js"></script>
+    <script src="js/jquery.i18n.emitter.bidi.js"></script>
+    <script src="js/languages/en.js"></script>
+    <script src="js/global.js"></script>
+
+</head>
+<body id="page-top">
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+    <div class="container">
+
+        <a class="navbar-brand js-scroll-trigger" href="#page-top" data-i18n="[title]homepage">Binary Elements</a>
+        <div class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold rounded"
+             type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
+             aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars rounded" style="font-size: 50px; color: var(--darkPrimary)"></i>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item mx-0 mx-lg-1">
+                    <hr class="nav-line nav-line-first">
+                    <a class="nav-link px-0 px-lg-3 rounded js-scroll-trigger" style="margin-top: 0.8%"
+                       href="#converter" data-i18n="converter">Prevodník</a></li>
+                <li class="nav-item mx-0 mx-lg-1">
+                    <hr class="nav-line">
+                    <a class="nav-link px-0 px-lg-3 rounded js-scroll-trigger"
+                       href="#calculator" data-i18n="calculator">Kalkulačka</a></li>
+                <li class="nav-item mx-0 mx-lg-1">
+                    <hr class="nav-line">
+                    <a class="nav-link px-0 px-lg-3 rounded js-scroll-trigger"
+                       href="#solver" style="white-space: nowrap;" data-i18n="map_solver">Riešiteľ máp</a></li>
+                <li class="nav-item mx-0 mx-lg-1">
+                    <hr class="nav-line">
+                    <i class="bi bi-sliders text-white kmap_menu js-scroll-trigger"
+                       data-toggle="modal" data-target="#exampleModalCenter" id="kmap_menu"></i>
+                    <a id="setting_navbar_span" class="nav-link px-0 px-lg-3 rounded js-scroll-trigger"
+                       data-toggle="modal" data-target="#exampleModalCenter" style="cursor: pointer" data-i18n="settings">Nastavenia</a>
+                    <!--                    </div>-->
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- Masthead-->
+<header class="masthead bg-primary text-white text-center">
+    <div class="container d-flex align-items-center flex-column">
+
+        <h1 class="masthead-heading text-uppercase mb-0" data-i18n="home">Úvod</h1>
+        <!-- Icon Divider-->
+        <br>
+        <div class="divider-custom divider-light">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><img src="assets/img/icon.png" alt="icon" width="40"></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <!-- Masthead Subheading-->
+        <br>
+        <p class="masthead-subheading font-weight-bold mb-0" data-i18n="welcome">Vitajte</p>
+        <p class="masthead-subheading font-weight-bold mb-0" data-i18n="welcome_text">
+            v aplikácií, ktorá poskytuje rôzne nástroje na prácu s číselnými sústavami a minimalizáciu výrazu.</p>
+        <!--        to our application which provides different tools to work with binary and other number systems.-->
+        <br>
+        <ul class="locale-switcher">
+            <li><a href="#" data-locale="sk" id="sk_lang" title="Slovenský jazyk"><img src="assets/img/sk_icon.ico" alt="Slovak"></a></li>
+            <li><a href="#" data-locale="en" id="en_lang" title="English language"><img src="assets/img/en_icon.ico" alt="English"></a></li>
+        </ul>
+        <div class="buttons align-items-center d-flex flex-column">
+
+            <a class="nav-link js-scroll-trigger font-weight-bold w-100" href="#converter">
+                <button type="button" data-i18n="[title]goToConv"
+                        class="btn btn-secondary d-flex w-100 justify-content-center">
+                    <i class="bi bi-arrow-left-right align-self-center"></i>
+                    <span class="nav-link text-white font-weight-bold"
+                          style="font-size: 1.75rem" data-i18n="unit_converter">Prevodník sústav</span></button>
+            </a>
+            <br>
+            <a class="nav-link js-scroll-trigger font-weight-bold w-100" href="#calculator">
+                <button type="button" data-i18n="[title]goToCalc"
+                        class="btn btn-secondary d-flex w-100 justify-content-center">
+                    <i class="bi bi-calculator-fill align-self-center"></i>
+                    <span class="nav-link text-white font-weight-bold" style="font-size: 1.75rem" data-i18n="calculator">Kalkulačka</span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">Converter</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">Calculator</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Map Solver</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        
-        <!-- Masthead-->
-        <header class="masthead bg-primary text-white text-center">
-            <div class="container d-flex align-items-center flex-column">
-                <!-- Masthead Avatar Image-->
-<!--                <img class="masthead-avatar mb-5" src="assets/img/avataaars.svg" alt="" />-->
-                <!-- Masthead Heading-->
-                <h1 class="masthead-heading text-uppercase mb-0">Home</h1>
-                <!-- Icon Divider-->
-                <div class="divider-custom divider-light">
-                    <div class="divider-custom-line"></div>
-                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                    <div class="divider-custom-line"></div>
-                </div>
-                <!-- Masthead Subheading-->
-                <p class="masthead-subheading font-weight-light mb-0">Welcome</p>
-                <p class="masthead-subheading font-weight-light mb-0">
-                    to our application which provides different tools to work with binary and other systems.</p>
-                <button type="button" title="Go to unit convertion" class="btn btn-secondary">Unit converter</button>
-                <button type="button" title="Go to Calculator" class="btn btn-secondary">Calculator</button>
-                <button type="button" title="Go to map " class="btn btn-secondary">Map solver</button>
-            </div>
-        </header>
-        <!-- Portfolio Section-->
-        <section class="page-section portfolio" id="portfolio">
-            <div class="container">
-                <!-- Portfolio Section Heading-->
-                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Unit converter</h2>
-                <!-- Icon Divider-->
-                <div class="divider-custom">
-                    <div class="divider-custom-line"></div>
-                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                    <div class="divider-custom-line"></div>
-                </div>
+            </a>
+            <br>
+            <a class="nav-link js-scroll-trigger font-weight-bold w-100" href="#solver">
+                <button type="button" data-i18n="[title]goToMS"
+                        class="btn btn-secondary d-flex w-100 justify-content-center">
+                    <i class="bi bi-cpu-fill align-self-center"></i>
+                    <span class="nav-link text-white font-weight-bold" style="font-size: 1.75rem" data-i18n="map_solver">Riešiteľ máp</span>
+                </button>
+            </a>
+        </div>
+    </div>
 
-                <div id="doc" class="container d-flex flex-column align-items-center">
-                    <!-- #BeginEditable "doctext" -->
-                    <div id="unitnav" class="form-row mb-2" style="max-width:476px;">
-                        <div class="form-group col">
-                            <label for="converter_unit_1">From</label>
-                            <select id="converter_unit_1" class="form-control">
-                                <option>Binary</option>
-                                <option selected>Decimal</option>
-                                <option>Octal</option>
-                                <option>Hexadecimal</option>
-                            </select>
-                        </div>
-                        <div class="form-group col" style="display: none">
-                            <label for="converter_unit_2">To</label>
-                            <select id="converter_unit_2" class="form-control">
-                                <option>Decimal</option>
-                                <option>Binary</option>
-                                <option selected>Hexadecimal</option>
-                            </select>
-                        </div>
-                    </div>
-                        <table class="calc">
-                            <tbody>
-                            <tr>
-                                <td colspan="2"><label id="converter_input_label" for="converter_input">Enter Decimal number:</label></td>
-                            </tr>
-                            <tr>
-                                <!--<td><input type="number" step="any" id="x" name="x" class="intext" autofocus tabindex="1"></td>-->
-                                <td><input type="text" inputmode="numeric" id="converter_input" name="converter_input"
-                                           class="form-control" required></td>
-                                <td id="converter_input_symbol" class="mathsymbol"><sub>10</sub></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <br>
-                                    <button type="button" title="Convert" class="btn btn-primary" onclick="convert()" style="display: none"> Convert</button>
-                                    <button type="button" onclick="converter_reset()" title="Reset" class="btn btn-danger">Reset</button>
-                                    <button type="button" title="Swap conversion" class="btn btn-secondary" style="display: none"> Swap</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" style="bottom: -20px"><label for="converter_output_1" id="converter_label_1">Binary</label></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <textarea rows="2" id="converter_output_1" class="form-control copyable" readonly></textarea>
-                                    <img class="copy_icon" src="assets/img/copyicon.png" onclick="copyText('converter_output_1')" alt="copy">
-                                </td>
-                                <td id="converter_output_symbol1" class="mathsymbol"><sub>2</sub></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2"><label for="converter_output_2" id="converter_label_2">Octal</label></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <textarea rows="2" id="converter_output_2" class="form-control copyable" readonly></textarea>
-                                    <img class="copy_icon" src="assets/img/copyicon.png" onclick="copyText('converter_output_2')" alt="copy">
-                                </td>
-                                <td id="converter_output_symbol2" class="mathsymbol"><sub>8</sub></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2"><label for="converter_output_3" id="converter_label_3">Hexadecimal</label></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <textarea rows="2" id="converter_output_3" class="form-control copyable" readonly></textarea>
-                                    <img class="copy_icon" src="assets/img/copyicon.png" onclick="copyText('converter_output_3')" alt="copy">
-                                </td>
-                                <td id="converter_output_symbol3" class="mathsymbol"><sub>16</sub></td>
-                            </tr>
-                            </tbody>
-                        </table>
+</header>
+<section class="page-section portfolio page1" id="converter">
+    <div class="container">
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0" data-i18n="unit_converter">Prevodník sústav</h2>
+        <div class="divider-custom">
+            <div class="divider-custom-line" style="max-width: 10rem;"></div>
+            <div class="divider-custom-icon"><i class="bi bi-arrow-left-right"></i></div>
+            <div class="divider-custom-line" style="max-width: 10rem;"></div>
+        </div>
+
+        <div id="doc" class="container d-flex flex-column align-items-center">
+            <div id="unitnav" class="form-row mb-2" style="max-width:476px;">
+                <div class="form-group col">
+                    <label for="converter_unit_1" data-i18n="conversion_from">Prevod z</label>
+                    <select id="converter_unit_1" class="form-control">
+                        <option data-i18n="binary">Dvojková</option>
+                        <option data-i18n="octal">Osmičková</option>
+                        <option data-i18n="decimal" selected>Desiatková</option>
+                        <option data-i18n="hex">Šestnástková</option>
+                        <option data-i18n="bcd">BCD kód</option>
+                        <option data-i18n="dc">Priamy kód</option>
+                        <option data-i18n="ic">Inverzný kód</option>
+                        <option data-i18n="cc">Doplnkový kód</option>
+                    </select>
                 </div>
             </div>
-        </section>
-        <!-- About Section-->
-        <section class="page-section bg-primary text-white mb-0" id="about">
-            <div class="container">
-                <!-- About Section Heading-->
-                <h2 class="page-section-heading text-center text-uppercase text-white">Calculator</h2>
-                <!-- Icon Divider-->
-                <div class="divider-custom divider-light">
-                    <div class="divider-custom-line"></div>
-                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                    <div class="divider-custom-line"></div>
-                </div>
-                <!-- About Section Content-->
-                <div class="row">
-                    <div id="doc1" class="container d-flex flex-column align-items-center">
-                        <!-- #BeginEditable "doctext" -->
-                        <h1>Binary Calculator</h1>
-                            <table class="calc">
-                                <tbody>
-                                <tr>
-                                    <td colspan="2"><label for="calculator_first_number">First number:</label></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="text" id="calculator_first_number" name="calculator_first_number" autofocus oninput="this.value = this.value.toUpperCase()" class="form-control input-lg"></td>
-                                    <td><select id="calculator_first_op" class="form-control input-lg">
+            <table class="calc">
+                <tbody>
+                <tr>
+                    <td colspan="2"><label id="converter_input_label" for="converter_input" data-i18n="enter_number">Vlož číslo:
+                    </label></td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" inputmode="numeric" id="converter_input" name="converter_input"
+                               class="form-control" required></td>
+
+                    <td class="mathsymbol"><sub id="converter_input_symbol">10</sub></td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="d-flex justify-content-evenly" style="margin: 6% 0">
+                        <button type="button" title="Convert" class="btn btn-primary" onclick="convert()"
+                                style="display: none"> Convert
+                        </button>
+                        <button id="converter_reset" type="button" title="Reset" class="btn btn-danger">Reset
+                        </button>
+                        <button type="button" title="Toggle results" class="btn btn-secondary binbtn" id="binaryButton" data-i18n="binary_codes">
+                            Binárne kódy
+                        </button>
+                    </td>
+                </tr>
+                <tr class="cb" style="display: none">
+                    <td>
+                        <div class="col m-auto text-center d-flex flex-column align-items-center">
+                            <div style="margin-bottom: 8%"><label id="converter_bits_label" for="converter_bits" data-i18n="bit_count">Počet bitov:</label></div>
+                            <div class="w-auto text-center d-flex flex-column align-items-center">
+                                <select id="converter_bits" class="form-control input-fc" style="max-width: 3rem;">
+                                <option>2</option>
+                                <option>4</option>
+                                <option selected>8</option>
+                                <option>16</option>
+                                <option>32</option>
+                            </select>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="co1">
+                    <td colspan="2" style="bottom: -20px">
+                        <label for="converter_output_1" id="converter_label_1" data-i18n="binary_system">Dvojková sústava</label></td>
+                </tr>
+                <tr class="co1">
+                    <td>
+                        <textarea id="converter_output_1" class="form-control copyable solverResultDiv"
+                                  readonly></textarea>
+                        <i id="copy1" class="bi bi-files copy_icon" onclick="copyText(this, 'converter_output_1')"
+                           data-toggle="tooltip" data-trigger="manual focus" data-placement="top"
+                           data-i18n="[title]copied"></i>
+                    </td>
+                    <td id="converter_output_symbol1" class="mathsymbol"><sub>2</sub></td>
+                </tr>
+                <tr class="co2">
+                    <td colspan="2"><label for="converter_output_2" id="converter_label_2" data-i18n="octal_system">Osmičková sústava</label>
+                    </td>
+                </tr>
+                <tr class="co2">
+                    <td>
+                        <textarea id="converter_output_2" class="form-control copyable solverResultDiv"
+                                  readonly></textarea>
+                        <i id="copy2" class="bi bi-files copy_icon" onclick="copyText(this, 'converter_output_2')"
+                           data-toggle="tooltip" data-trigger="manual focus" data-placement="top"
+                           data-i18n="[title]copied"></i>
+                    </td>
+                    <td id="converter_output_symbol2" class="mathsymbol"><sub>8</sub></td>
+                </tr>
+                <tr class="co3" style="display: none;">
+                    <td colspan="2"><label for="converter_output_3" id="converter_label_3" data-i18n="decimal_system">Desiatková sústava</label>
+                    </td>
+                </tr>
+                <tr class="co3" style="display: none;">
+                    <td>
+                        <textarea id="converter_output_3" class="form-control copyable solverResultDiv"
+                                  readonly></textarea>
+                        <i id="copy3" class="bi bi-files copy_icon" onclick="copyText(this, 'converter_output_3')"
+                           data-toggle="tooltip" data-trigger="manual focus" data-placement="top"
+                           data-i18n="[title]copied"></i>
+                    </td>
+                    <td id="converter_output_symbol3" class="mathsymbol"><sub>10</sub></td>
+                </tr>
+                <tr class="coex">
+                    <td colspan="2"><label for="converter_output_ex" id="converter_label_ex" data-i18n="hex_system">Šestnástková
+                        sústava</label></td>
+                </tr>
+                <tr class="coex">
+                    <td>
+                        <textarea id="converter_output_ex" class="form-control copyable solverResultDiv"
+                                  readonly></textarea>
+                        <i id="copyex" class="bi bi-files copy_icon" onclick="copyText(this, 'converter_output_ex')"
+                           data-toggle="tooltip" data-trigger="manual focus" data-placement="top"
+                           data-i18n="[title]copied"></i>
+                    </td>
+                    <td id="converter_output_symbolex" class="mathsymbol"><sub>16</sub></td>
+                </tr>
+
+                <tr class="co4" style="display: none">
+                    <td colspan="2"><label for="converter_output_4" id="converter_label_4" data-i18n="bcd">BCD kód</label></td>
+                </tr>
+                <tr class="co4" style="display: none">
+                    <td>
+                        <textarea id="converter_output_4" class="form-control copyable solverResultDiv"
+                                  readonly></textarea>
+                        <i id="copy4" class="bi bi-files copy_icon" onclick="copyText(this, 'converter_output_4')"
+                           data-toggle="tooltip" data-trigger="manual focus" data-placement="top"
+                           data-i18n="[title]copied"></i>
+                    </td>
+                    <td id="converter_output_symbol4" class="mathsymbol"><sub>BCD</sub></td>
+                </tr>
+
+                <tr class="co5" style="display: none">
+                    <td colspan="2"><label for="converter_output_5" id="converter_label_5" data-i18n="dc">Priamy kód</label></td>
+                </tr>
+                <tr class="co5" style="display: none">
+                    <td>
+                        <textarea id="converter_output_5" class="form-control copyable solverResultDiv"
+                                  readonly></textarea>
+                        <i id="copy5" class="bi bi-files copy_icon" onclick="copyText(this, 'converter_output_5')"
+                           data-toggle="tooltip" data-trigger="manual focus" data-placement="top"
+                           data-i18n="[title]copied"></i>
+                    </td>
+                    <td id="converter_output_symbol5" class="mathsymbol"><sub data-i18n="dc_l">PK</sub></td>
+                </tr>
+
+                <tr class="co6" style="display: none">
+                    <td colspan="2"><label for="converter_output_6" id="converter_label_6" data-i18n="ic">Inverzný kód</label></td>
+                </tr>
+                <tr class="co6" style="display: none">
+                    <td>
+                        <textarea id="converter_output_6" class="form-control copyable solverResultDiv"
+                                  readonly></textarea>
+                        <i id="copy6" class="bi bi-files copy_icon" onclick="copyText(this, 'converter_output_6')"
+                           data-toggle="tooltip" data-trigger="manual focus" data-placement="top"
+                           data-i18n="[title]copied"></i>
+                    </td>
+                    <td id="converter_output_symbol6" class="mathsymbol"><sub data-i18n="ic_l">IK</sub></td>
+                </tr>
+
+                <tr class="co7" style="display: none">
+                    <td colspan="2"><label for="converter_output_7" id="converter_label_7" data-i18n="cc">Doplnkový kód</label></td>
+                </tr>
+                <tr class="co7" style="display: none">
+                    <td>
+                        <textarea id="converter_output_7" class="form-control copyable solverResultDiv"
+                                  readonly></textarea>
+                        <i id="copy7" class="bi bi-files copy_icon" onclick="copyText(this, 'converter_output_7')"
+                           data-toggle="tooltip" data-trigger="manual focus" data-placement="top"
+                           data-i18n="[title]copied"></i>
+                    </td>
+                    <td id="converter_output_symbol7" class="mathsymbol"><sub data-i18n="cc_l">DK</sub></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<section class="page-section bg-primary text-white mb-0 page2" id="calculator">
+    <div class="container">
+        <h2 class="page-section-heading text-center text-uppercase text-white mb-0" data-i18n="calculator">Kalkulačka</h2>
+        <div class="divider-custom divider-light">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="bi bi-calculator-fill"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <div class="row">
+            <div id="doc1" class="container d-flex flex-column align-items-center">
+                <table class="calc">
+                    <tbody>
+                    <tr>
+                        <td colspan="2"><label for="calculator_first_number" data-i18n="first_operand">Prvý operand:</label></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" id="calculator_first_number" name="calculator_first_number"
+                                   class="form-control input-lg"></td>
+                        <td style="position: relative;"><select id="calculator_first_op"
+                                                                class="form-control input-lg input-fc"
+                                                                style="width: 3rem">
+                            <option>2</option>
+                            <option>8</option>
+                            <option>10</option>
+                            <option>16</option>
+                            <option data-i18n="bcd">BCD kód</option>
+                            <option data-i18n="dc">Priamy kód</option>
+                            <option data-i18n="ic">Inverzný kód</option>
+                            <option data-i18n="cc">Doplnkový kód</option>
+                        </select></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><label for="calculator_op" class=" operation operation_l" data-i18n="operation">Operácia:</label></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <select id="calculator_op" class="form-control input-lg operation">
+                                <option data-i18n="add">plus (+)</option>
+                                <option data-i18n="sub">mínus (-)</option>
+                                <option data-i18n="mul">krát (*)</option>
+                                <option data-i18n="div">delené (/)</option>
+                                <option>mod (%)</option>
+                                <option>or (|)</option>
+                                <option>xor (^)</option>
+                                <option>and (&)</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><label for="calculator_second_number" data-i18n="second_operand">Druhý operand:</label></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" id="calculator_second_number" name="calculator_second_number"
+                                   class="form-control input-lg"></td>
+                        <td style="position: relative;"><select id="calculator_second_op"
+                                                                class="form-control input-lg input-fc"
+                                                                style="width: 3rem">
+                            <option>2</option>
+                            <option>8</option>
+                            <option>10</option>
+                            <option>16</option>
+                            <option data-i18n="bcd">BCD kód</option>
+                            <option data-i18n="dc">Priamy kód</option>
+                            <option data-i18n="ic">Inverzný kód</option>
+                            <option data-i18n="cc">Doplnkový kód</option>
+                        </select></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="d-flex justify-content-evenly" style="margin: 6% 0">
+                            <button id="calculator_reset" type="button" title="Reset" class="btn btn-danger btn-md">
+                                Reset
+                            </button>
+                            <button type="button" title="Toggle results" class="btn btn-secondary binbtn" id="binaryButton2" data-i18n="binary_codes">
+                                <span>Binárne kódy</span>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="cb1" style="display: none">
+                        <td>
+                            <div class="col m-auto text-center d-flex flex-column align-items-center">
+                                <div style="margin-bottom: 7%"><label id="calculator_bits_label" for="calculator_bits" data-i18n="bit_count">Počet bitov:</label></div>
+                                <div class="w-auto text-center d-flex flex-column align-items-center">
+                                    <select id="calculator_bits" class="form-control input-fc" style="max-width: 3rem;">
                                         <option>2</option>
-                                        <option>8</option>
-                                        <option>10</option>
+                                        <option>4</option>
+                                        <option selected>8</option>
                                         <option>16</option>
-                                    </select></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2"><label for="calculator_op">Operation:</label></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <select id="calculator_op" class="form-control input-lg">
-                                            <option>add (+)</option>
-                                            <option>sub (-)</option>
-                                            <option>mul (*)</option>
-                                            <option>div (/)</option>
-                                            <!--<option>zerofill right shift (>>)</option>-->
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2"><label for="calculator_second_number">Second number:</label></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="text" id="calculator_second_number" name="calculator_second_number"  class="form-control input-lg"></td>
-                                    <td><select id="calculator_second_op" class="form-control input-lg">
-                                        <option>2</option>
-                                        <option>8</option>
-                                        <option>10</option>
-                                        <option>16</option>
-                                    </select></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <button type="button" title="Calculate" class="btn btn-secondary btn-lg">Calculate</button>
-                                        <button type="button" title="Reset" class="btn btn-danger btn-lg" onclick="calculator_reset()">Reset</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2"><label for="calculator_output_1">Binary</label></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <textarea rows="2" id="calculator_output_1" class="form-control input-lg" readonly></textarea>
-                                        <img class="copy_icon" src="assets/img/copyicon.png" onclick="copyText('calculator_output_1')" alt="copy">
-                                    </td>
-                                    <td id="calculator_output_symbol1" class="mathsymbol"><sub>2</sub></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2"><label for="calculator_output_2">Octal</label></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <textarea rows="2" id="calculator_output_2" class="form-control input-lg" readonly></textarea>
-                                        <img class="copy_icon" src="assets/img/copyicon.png" onclick="copyText('calculator_output_2')" alt="copy">
-                                    </td>
-                                    <td id="calculator_output_symbol2" class="mathsymbol"><sub>8</sub></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2" ><label for="calculator_output_3">Decimal</label></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <textarea rows="2" id="calculator_output_3" class="form-control input-lg" readonly></textarea>
-                                        <img class="copy_icon" src="assets/img/copyicon.png" onclick="copyText('calculator_output_3')" alt="copy">
-                                    </td>
-                                    <td id="calculator_output_symbol3" class="mathsymbol"><sub>10</sub></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2"><label for="calculator_output_4">Hexadecimal</label></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2"><textarea rows="2" id="calculator_output_4" class="form-control copyable input-lg" readonly></textarea></td>
-                                    <td id="calculator_output_symbol4" class="mathsymbol"><sub>16</sub></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                    </div>
-                </div>
-                <!-- About Section Button-->
-                <div class="text-center mt-4">
-                    <a class="btn btn-xl btn-outline-light" href="https://startbootstrap.com/themes/freelancer/">
-                        <i class="fas fa-download mr-2"></i>
-                        Calculate
-                    </a>
-                </div>
-            </div>
-        </section>
-        <!-- Contact Section-->
-        <section class="page-section" id="contact">
-            <div class="container">
-                <!-- Contact Section Heading-->
-                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Karnaugh map solver</h2>
-                <!-- Icon Divider-->
-                <div class="divider-custom">
-                    <div class="divider-custom-line"></div>
-                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                    <div class="divider-custom-line"></div>
-                </div>
-                <!-- Contact Section Form-->
-                <div class="row">
-                    <div class="col-lg-8 mx-auto">
-                        <div class="kmap-truth-table">
-                            <form method="get">
-                                <div>
-                                    <table class="table table-bordered"><thead><tr><td width="17%">A</td><td width="17%">B</td><td width="17%">C</td><td width="17%">ABC</td><td width="17%">Numeric</td><td width="17%">Choose</td></tr></thead><tbody>
-                                    <tr><td>0</td><td>0</td><td>0</td><td><span class="border-top">A</span><span class="border-top">B</span><span class="border-top">C</span></td><td>0</td><td>
-                                        <div class="k-map-selector text-center">
-                                            <input type="checkbox" id="kmapCheckbox0" name="kmap" value="0"  />
-                                            <label class="kmap-switch-label" for="kmapCheckbox0">
-                                                <span class="onoff"></span>
-                                                <span class="switch"></span>
-                                            </label>
-                                        </div>
-                                    </td></tr>
-                                    <tr><td>0</td><td>0</td><td>1</td><td><span class="border-top">A</span><span class="border-top">B</span>C</td><td>1</td><td>
-                                        <div class="k-map-selector text-center">
-                                            <input type="checkbox" id="kmapCheckbox1" name="kmap" value="1"  />
-                                            <label class="kmap-switch-label" for="kmapCheckbox1">
-                                                <span class="onoff"></span>
-                                                <span class="switch"></span>
-                                            </label>
-                                        </div>
-                                    </td></tr>
-                                    <tr><td>0</td><td>1</td><td>0</td><td><span class="border-top">A</span>B<span class="border-top">C</span></td><td>2</td><td>
-                                        <div class="k-map-selector text-center">
-                                            <input type="checkbox" id="kmapCheckbox2" name="kmap" value="2"  />
-                                            <label class="kmap-switch-label" for="kmapCheckbox2">
-                                                <span class="onoff"></span>
-                                                <span class="switch"></span>
-                                            </label>
-                                        </div>
-                                    </td></tr>
-                                    <tr><td>0</td><td>1</td><td>1</td><td><span class="border-top">A</span>BC</td><td>3</td><td>
-                                        <div class="k-map-selector text-center">
-                                            <input type="checkbox" id="kmapCheckbox3" name="kmap" value="3"  />
-                                            <label class="kmap-switch-label" for="kmapCheckbox3">
-                                                <span class="onoff"></span>
-                                                <span class="switch"></span>
-                                            </label>
-                                        </div>
-                                    </td></tr>
-                                    <tr><td>1</td><td>0</td><td>0</td><td>A<span class="border-top">B</span><span class="border-top">C</span></td><td>4</td><td>
-                                        <div class="k-map-selector text-center">
-                                            <input type="checkbox" id="kmapCheckbox4" name="kmap" value="4"  />
-                                            <label class="kmap-switch-label" for="kmapCheckbox4">
-                                                <span class="onoff"></span>
-                                                <span class="switch"></span>
-                                            </label>
-                                        </div>
-                                    </td></tr>
-                                    <tr><td>1</td><td>0</td><td>1</td><td>A<span class="border-top">B</span>C</td><td>5</td><td>
-                                        <div class="k-map-selector text-center">
-                                            <input type="checkbox" id="kmapCheckbox5" name="kmap" value="5"  />
-                                            <label class="kmap-switch-label" for="kmapCheckbox5">
-                                                <span class="onoff"></span>
-                                                <span class="switch"></span>
-                                            </label>
-                                        </div>
-                                    </td></tr>
-                                    <tr><td>1</td><td>1</td><td>0</td><td>AB<span class="border-top">C</span></td><td>6</td><td>
-                                        <div class="k-map-selector text-center">
-                                            <input type="checkbox" id="kmapCheckbox6" name="kmap" value="6"  />
-                                            <label class="kmap-switch-label" for="kmapCheckbox6">
-                                                <span class="onoff"></span>
-                                                <span class="switch"></span>
-                                            </label>
-                                        </div>
-                                    </td></tr>
-                                    <tr><td>1</td><td>1</td><td>1</td><td>ABC</td><td>7</td><td>
-                                        <div class="k-map-selector text-center">
-                                            <input type="checkbox" id="kmapCheckbox7" name="kmap" value="7"  />
-                                            <label class="kmap-switch-label" for="kmapCheckbox7">
-                                                <span class="onoff"></span>
-                                                <span class="switch"></span>
-                                            </label>
-                                        </div>
-                                    </td></tr>
-                                    <tr><td colspan="6">
-                                        <button id="submit" class="calender-focus calender-submit-button">SOLVE</button></td></tr></tbody></table>
+                                        <option>32</option>
+                                    </select>
                                 </div>
-                            </form>
-                            <input type="hidden" name="option" value='3' id="option">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="co8">
+                        <td colspan="2"><label for="calculator_output_1" data-i18n="binary_system">Dvojková sústava</label></td>
+                    </tr>
+                    <tr class="co8">
+                        <td colspan="2">
+                            <textarea id="calculator_output_1" class="form-control copyable solverResultDiv"
+                                      readonly></textarea>
+                            <i id="copy8" class="bi bi-files copy_icon" onclick="copyText(this, 'calculator_output_1')"
+                               data-toggle="tooltip" data-trigger="manual focus" data-placement="top"
+                               data-i18n="[title]copied"></i>
+                        </td>
+                        <td id="calculator_output_symbol1" class="mathsymbol"><sub>2</sub></td>
+                    </tr>
+                    <tr class="co9">
+                        <td colspan="2"><label for="calculator_output_2" data-i18n="octal_system">Osmičková sústava</label></td>
+                    </tr>
+                    <tr class="co9">
+                        <td colspan="2">
+                            <textarea id="calculator_output_2" class="form-control copyable solverResultDiv"
+                                      readonly></textarea>
+
+                            <i id="copy9" class="bi bi-files copy_icon" onclick="copyText(this, 'calculator_output_2')"
+                               data-toggle="tooltip" data-trigger="manual focus" data-placement="top"
+                               data-i18n="[title]copied"></i>
+                        </td>
+                        <td id="calculator_output_symbol2" class="mathsymbol"><sub>8</sub></td>
+                    </tr>
+                    <tr class="co10">
+                        <td colspan="2"><label for="calculator_output_3" data-i18n="decimal_system">Desiatková sústava</label></td>
+                    </tr>
+                    <tr class="co10">
+                        <td colspan="2">
+                            <textarea id="calculator_output_3" class="form-control copyable solverResultDiv"
+                                      readonly></textarea>
+                            <i id="copy10" class="bi bi-files copy_icon" onclick="copyText(this, 'calculator_output_3')"
+                               data-toggle="tooltip" data-trigger="manual focus" data-placement="top"
+                               data-i18n="[title]copied"></i>
+                        </td>
+                        <td id="calculator_output_symbol3" class="mathsymbol"><sub>10</sub></td>
+                    </tr>
+                    <tr class="co11">
+                        <td colspan="2"><label for="calculator_output_4" data-i18n="hex_system">Šestnástková sústava</label></td>
+                    </tr>
+                    <tr class="co11">
+                        <td colspan="2">
+                            <textarea id="calculator_output_4" class="form-control copyable solverResultDiv"
+                                      readonly></textarea>
+                            <i id="copy11" class="bi bi-files copy_icon" onclick="copyText(this, 'calculator_output_4')"
+                               data-toggle="tooltip" data-trigger="manual focus" data-placement="top"
+                               data-i18n="[title]copied"></i>
+                        </td>
+                        <td id="calculator_output_symbol4" class="mathsymbol"><sub>16</sub></td>
+                    </tr>
+                    <tr class="co12" style="display: none">
+                        <td colspan="2"><label for="converter_output_4" id="calculator_label_4" data-i18n="bcd">BCD kód</label></td>
+                    </tr>
+                    <tr class="co12" style="display: none">
+                        <td>
+                            <textarea id="calculator_output_5" class="form-control copyable solverResultDiv"
+                                      readonly></textarea>
+                            <i id="copy12" class="bi bi-files copy_icon" onclick="copyText(this, 'calculator_output_5')"
+                               data-toggle="tooltip" data-trigger="manual focus" data-placement="top"
+                               data-i18n="[title]copied"></i>
+                        </td>
+                        <td id="calculator_output_symbol5" class="mathsymbol"><sub>BCD</sub></td>
+                    </tr>
+
+                    <tr class="co13" style="display: none">
+                        <td colspan="2"><label for="converter_output_6" id="calculator_label_5" data-i18n="dc">Priamy kód</label></td>
+                    </tr>
+                    <tr class="co13" style="display: none">
+                        <td>
+                            <textarea id="calculator_output_6" class="form-control copyable solverResultDiv"
+                                      readonly></textarea>
+                            <i id="copy13" class="bi bi-files copy_icon" onclick="copyText(this, 'calculator_output_6')"
+                               data-toggle="tooltip" data-trigger="manual focus" data-placement="top"
+                               data-i18n="[title]copied"></i>
+                        </td>
+                        <td id="calculator_output_symbol6" class="mathsymbol"><sub data-i18n="dc_l">PK</sub></td>
+                    </tr>
+
+                    <tr class="co14" style="display: none">
+                        <td colspan="2"><label for="calculator_output_7" id="calculator_label_7" data-i18n="ic">Inverzný kód</label>
+                        </td>
+                    </tr>
+                    <tr class="co14" style="display: none">
+                        <td>
+                            <textarea id="calculator_output_7" class="form-control copyable solverResultDiv"
+                                      readonly></textarea>
+                            <i id="copy14" class="bi bi-files copy_icon" onclick="copyText(this, 'calculator_output_7')"
+                               data-toggle="tooltip" data-trigger="manual focus" data-placement="top"
+                               data-i18n="[title]copied"></i>
+                        </td>
+                        <td id="calculator_output_symbol7" class="mathsymbol"><sub data-i18n="ic_l">IK</sub></td>
+                    </tr>
+
+                    <tr class="co15" style="display: none">
+                        <td colspan="2"><label for="calculator_output_8" id="calculator_label_8" data-i18n="cc">Doplnkový kód</label>
+                        </td>
+                    </tr>
+                    <tr class="co15" style="display: none">
+                        <td>
+                            <textarea id="calculator_output_8" class="form-control copyable solverResultDiv"
+                                      readonly></textarea>
+                            <i id="copy15" class="bi bi-files copy_icon" onclick="copyText(this, 'calculator_output_8')"
+                               data-toggle="tooltip" data-trigger="manual focus" data-placement="top"
+                               data-i18n="[title]copied"></i>
+                        </td>
+                        <td id="calculator_output_symbol8" class="mathsymbol"><sub data-i18n="cc_l">DK</sub></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="page-section page3" id="solver">
+    <div class="container">
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0" style="word-break: break-word" data-i18n="Kmap_solver">
+            Riešiteľ Karnaughových máp</h2>
+        <div class="divider-custom">
+            <div class="divider-custom-line" style="max-width: 16rem;"></div>
+            <div class="divider-custom-icon"><i class="bi bi-cpu-fill"></i></div>
+            <div class="divider-custom-line" style="max-width: 16rem;"></div>
+        </div>
+        <div>
+            <h6 class="text-center mb-0 kmap_var" data-i18n="var_count">počet premenných:</h6>
+        </div>
+        <div class="slidecontainer">
+            <output id="output" class="kmap_var">3</output>
+            <input name="range-input" type="range" min="1" max="10" value="3" step="1" class="slider" id="slider">
+        </div>
+        <div style="display: flex; justify-content: center; margin-bottom: 4%" class="divider-custom">
+            <div>
+                <button id="kmapReset" type="button" title="Reset" class="btn btn-danger btn-md">Reset
+                </button>
+<!--                <button id="debug1" type="button" title="Debug 1" class="btn btn-secondary btn-md">Debug 1-->
+<!--                </button>-->
+<!--                <button id="debug2" type="button" title="Debug 2" class="btn btn-secondary btn-md">Debug 2-->
+<!--                </button>-->
+<!--                <button id="debug3" type="button" title="Debug 2" class="btn btn-secondary btn-md">Debug 3-->
+<!--                </button>-->
+            </div>
+            <div class="divider-custom-icon" style="margin-left: 8%"><i class="bi bi-sliders kmap_menu" id="menuButton"
+                                                                        data-toggle="modal"
+                                                                        data-target="#exampleModalCenter"
+                                                                        style="cursor: pointer"></i></div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <i aria-hidden="true" class="fas fa-chevron-left" style="color: var(--textSecondary)"></i>
                         </div>
+                        <h5 class="modal-title" id="exampleModalLongTitle" data-i18n="settings">Nastavenia</h5>
+                    </div>
+                    <div class="divider-custom">
+                        <div class="divider-custom-line" style="max-width: 80%; height: 0.1rem;"></div>
+                    </div>
+                    <div class="modal-body">
+
+                        <label for="modal_modeSwitch" style="width: 100%; margin: 0 auto 2%; text-align: center" data-i18n="min_form">Forma minimalizácie:</label>
+                        <div class="modal_modeSwitch" data-i18n="[title]Df/Kf">
+                            <input type="checkbox" name="modal_modeSwitch" class="modal_modeSwitch-checkbox"
+                                   id="modal_modeSwitch"
+                                   checked>
+                            <label class="modal_modeSwitch-label" for="modal_modeSwitch">
+                                <span class="modal_modeSwitch-inner" data-i18n="[content]mkf"></span>
+                                <span class="modal_modeSwitch-switch"></span>
+                            </label>
+                        </div>
+
+                        <label for="modal_nightMode" class="modalSetting" data-i18n="[title]night_mode_desc">
+                            <div class="modalIcon">
+                                <i class="fas fa-moon"></i>
+                            </div>
+                            <span data-i18n="night_mode">Nočný režim</span>
+                            <div class="material-switch pull-right">
+                                <input id="modal_nightMode" name="modal_nightMode" type="checkbox"/>
+                                <label for="modal_nightMode" class="label-primary"></label>
+                            </div>
+                        </label>
+
+                        <label for="modal_switch1" class="modalSetting" data-i18n="[title]show_table_desc">
+                            <div class="modalIcon">
+                                <i class="fas fa-table"></i>
+                            </div>
+                            <span data-i18n="show_table">Zobraziť tabuľku</span>
+                            <div class="material-switch pull-right">
+                                <input id="modal_switch1" name="modal_switch1" type="checkbox" checked/>
+                                <label for="modal_switch1" class="label-primary"></label>
+                            </div>
+                        </label>
+
+                        <label for="modal_switch2" class="modalSetting" data-i18n="[title]show_map_desc">
+                            <div class="modalIcon">
+                                <i class="fas fa-th"></i>
+                            </div>
+                            <span data-i18n="show_map">Zobraziť mapu</span>
+                            <div class="material-switch pull-right">
+                                <input id="modal_switch2" name="modal_switch2" type="checkbox" checked/>
+                                <label for="modal_switch2" class="label-primary"></label>
+                            </div>
+                        </label>
+
+                        <label for="modal_switch3" class="modalSetting" data-i18n="[title]show_circ_desc">
+                            <div class="modalIcon">
+                                <i class="fas fa-microchip"></i>
+                            </div>
+                            <span data-i18n="show_circuit">Zobraziť obvod</span>
+                            <div class="material-switch pull-right">
+                                <input id="modal_switch3" name="modal_switch3" type="checkbox" checked/>
+                                <label for="modal_switch3" class="label-primary"></label>
+                            </div>
+                        </label>
+
+                        <label for="modal_switch4" class="modalSetting" data-i18n="[title]show_ids_desc">
+                            <div class="modalIcon">
+<!--                                <i class="fab fa-buffer"></i>-->
+                                <i class="fas fa-layer-group"></i>
+                            </div>
+                            <span data-i18n="show_ids">Zobraziť id v mape</span>
+                            <div class="material-switch pull-right">
+                                <input id="modal_switch4" name="modal_switch4" type="checkbox"/>
+                                <label for="modal_switch4" class="label-primary"></label>
+                            </div>
+                        </label>
                     </div>
                 </div>
             </div>
-        </section>
-        <!-- Footer-->
-        <footer class="footer text-center">
-            <div class="container">
-                <div class="row">
-                    <!-- Footer Location-->
-                    <div class="col-lg-4 mb-5 mb-lg-0">
-                        <h4 class="text-uppercase mb-4">Location</h4>
-                        <p class="lead mb-0">
-                            2215 John Daniel Drive
-                            <br />
-                            Clark, MO 65243
-                        </p>
-                    </div>
-                    <!-- Footer Social Icons-->
-                    <div class="col-lg-4 mb-5 mb-lg-0">
-                        <h4 class="text-uppercase mb-4">Around the Web</h4>
-                        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-facebook-f"></i></a>
-                        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-twitter"></i></a>
-                        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-linkedin-in"></i></a>
-                        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-dribbble"></i></a>
-                    </div>
-                    <!-- Footer About Text-->
-                    <div class="col-lg-4">
-                        <h4 class="text-uppercase mb-4">About Freelancer</h4>
-                        <p class="lead mb-0">
-                            Freelance is a free to use, MIT licensed Bootstrap theme created by
-                            <a href="http://startbootstrap.com">Start Bootstrap</a>
-                            .
-                        </p>
-                    </div>
-                </div>
+        </div>
+        <div class="loadingDiv" id="loading" style="display: none">
+            <!--                <i class="fa fa-spinner fa-pulse fa-3x fa-fw text-primary" id="loadingIcon"></i>-->
+            <!--                <span class="sr-only">Loading...</span>-->
+            <div class="spinner-border text-primary" role="status" id="loadingIcon">
+                <span class="sr-only" data-i18n="loading">Načítava sa...</span>
             </div>
-        </footer>
-        <!-- Copyright Section-->
-        <div class="copyright py-4 text-center text-white">
-            <div class="container"><small>Copyright © Your Website 2020</small></div>
         </div>
-        <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes)-->
-        <div class="scroll-to-top d-lg-none position-fixed">
-            <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top"><i class="fa fa-chevron-up"></i></a>
+        <div class="mx-auto" style="display: flex;  justify-content: space-evenly; flex-wrap: wrap;" id="content">
+            <div class="kmap-truth-table" id="tableDiv" style="margin-bottom: 5%"></div>
+            <div id="KmapDiv" style="position:relative; overflow: auto; z-index: 2"></div>
+            <div class="solver_results" style="margin-top: 0">
+                <table class="calc">
+                    <tbody>
+                    <tr>
+                        <td colspan="2"><label for="solver_result_1" class="m-auto" id="solver_result_1_label" data-i18n="udnf">Úplná
+                            disjunktívna normálna forma (UDNF)</label></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" id="div_solver_result_1">
+                            <div id="solver_result_1" class="form-control copyable srD" tabindex="0"
+                                 readonly></div>
+                            <i id="copy18" class="bi bi-files copy_icon"
+                               onclick="copyText(this, 'solver_result_1', true)"
+                               data-toggle="tooltip" data-trigger="manual focus" data-placement="top"
+                               data-i18n="[title]copied"></i>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2"><label for="solver_result_2" id="solver_result_2_label" data-i18n="sdnf">Skrátená disjunktívna
+                            normálna forma (SDNF)</label></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" id="div_solver_result_2">
+                            <div id="solver_result_2" class="form-control copyable srD" tabindex="0"
+                                 readonly></div>
+                            <i id="copy19" class="bi bi-files copy_icon"
+                               onclick="copyText(this, 'solver_result_2', true)"
+                               data-toggle="tooltip" data-trigger="manual focus" data-placement="top"
+                               data-i18n="[title]copied"></i>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2"><label for="solver_result_3" id="solver_result_3_label" data-i18n="idnf">Iredundantná
+                            disjunktívna normálna forma (IDNF)</label></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" id="div_solver_result_3">
+                            <div id="solver_result_3" class="form-control copyable srD" tabindex="0"
+                                 readonly></div>
+                            <i id="copy20" class="bi bi-files copy_icon"
+                               onclick="copyText(this, 'solver_result_3', true)"
+                               data-toggle="tooltip" data-trigger="manual focus" data-placement="top"
+                               data-i18n="[title]copied"></i>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2"><label for="solver_result_4" id="solver_result_4_label" data-i18n="mdnf">Minimálna disjunktívna
+                            normálna forma (MDNF)</label></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" id="div_solver_result_4">
+                            <div id="solver_result_4" class="form-control copyable srD" tabindex="0"
+                                 readonly></div>
+                            <i id="copy21" class="bi bi-files copy_icon"
+                               onclick="copyText(this, 'solver_result_4', true)"
+                               data-toggle="tooltip" data-trigger="manual focus" data-placement="top"
+                               data-i18n="[title]copied"></i>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2"><label for="solver_result_5" data-i18n="in_vhdl">MDNF v jazyku VHDL</label></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" id="div_solver_result_5">
+                            <div id="solver_result_5" class="form-control copyable srD"
+                                 readonly></div>
+
+                            <i id="copy22" class="bi bi-files copy_icon"
+                               onclick="copyText(this, 'solver_result_5', true)"
+                               data-toggle="tooltip" data-trigger="manual focus" data-placement="top"
+                               data-i18n="[title]copied"></i>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="circuitDiv" style="position: relative; overflow-x: auto; margin-top: 3%; display: none"></div>
+
         </div>
+    </div>
+    </div>
+</section>
+<footer class="footer text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 mb-lg-0">
+                <h4 class="text-uppercase mb-4" data-i18n="author">Autor</h4>
+                <p class="lead mb-0">
+                    Richard Sabol
+                    <br/>
 
-        <!-- Bootstrap core JS-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
-        <!-- Third party plugin JS-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-        <!-- Contact form JS-->
-        <script src="assets/mail/jqBootstrapValidation.js"></script>
-        <script src="assets/mail/contact_me.js"></script>
-        <!-- Core theme JS-->
-        <script type="module" src="js/scripts.js"></script>
-        <script type="text/javascript" src="js/functions.js"></script>
+                </p>
+            </div>
+            <!-- Footer Social Icons-->
+            <!--            <div class="col-lg-4 mb-5 mb-lg-0">-->
+            <!--                <h4 class="text-uppercase mb-4">Around the Web</h4>-->
+            <!--                <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-facebook-f"></i></a>-->
+            <!--                <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-twitter"></i></a>-->
+            <!--                <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-linkedin-in"></i></a>-->
+            <!--                <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-dribbble"></i></a>-->
+            <!--            </div>-->
+            <!-- Footer About Text-->
+            <!--            <div class="col-lg-4">-->
+            <!--                <h4 class="text-uppercase mb-4">About Freelancer</h4>-->
+            <!--                <p class="lead mb-0">-->
+            <!--                    <a href="http://startbootstrap.com">Start Bootstrap</a>-->
+            <!--                    .-->
+            <!--                </p>-->
+            <!--            </div>-->
+        </div>
+    </div>
+</footer>
+<div class="copyright py-4 text-center text-white">
+    <div class="container"><small>Copyright © Binary Elements 2020</small></div>
+</div>
+<div class="scroll-to-top d-lg-none position-fixed">
+    <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top"><i
+            class="fa fa-chevron-up"></i></a>
+</div>
 
-<!--        <script>-->
-<!--            function copyText(index) {-->
-<!--                const copyText = document.getElementById(index);-->
-<!--                copyText.select();-->
-<!--                copyText.setSelectionRange(0, 99999);-->
-<!--                document.execCommand("copy");-->
-<!--            }-->
-
-<!--            function converter_reset() {-->
-<!--                document.getElementById('converter_input').value = ""-->
-<!--                document.getElementById('converter_output_1').value = ""-->
-<!--                document.getElementById('converter_output_2').value = ""-->
-<!--                document.getElementById('converter_output_3').value = ""-->
-<!--                converter_last_valid = ""-->
-<!--            }-->
-<!--        </script>-->
-
-<!--        oninput="this.value = this.value.toUpperCase()"-->
-<!--        <script src="js/big"></script>-->
-    </body>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="js/functions.js"></script>
+<script type="module" src="js/scripts.js"></script>
+</body>
 </html>
